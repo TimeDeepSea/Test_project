@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>留言板</title>
+    <script src="./js/jquery-3.6.1.min.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            color: #020c16;
+        }
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #b196d6;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(#8CA6DB,#B993D6);
+        }
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 520px;
+            background: linear-gradient(to button right,#8CA6DB,#B993D6);
+            box-shadow: 0 15px 25px rgba(28, 37, 40, 0.4);
+            padding: 5px;
+
+        }
+        .main h1 {
+            margin-bottom: 20px;
+            color: rgba(22, 25, 26, 0.6);
+            letter-spacing: 20px;
+            text-shadow: 3px 3px 1px rgba(22, 25, 26, 0.2);
+        }
+        .page {
+           width: 90%;
+        }
+        .content {
+            height: 200px;
+            width: 100%;
+            border: 1px solid #000;
+            padding: 20px;
+            overflow: auto;
+            
+        }
+        .content p {
+            max-width: 100%;
+            margin: 5px 0;
+            font-size: 14px;
+            line-height: 20px;
+            word-wrap: break-word;
+        }
+        .content1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 400px;
+            width: 100%;
+        }
+        .content1 textarea {
+            padding: 40px;
+            margin-bottom: 20px;
+            height: 300px;
+            width: 100%;
+            outline: none;
+            border: 1px solid #000;
+            background-color: inherit;
+            font-size: 16px;
+        }
+        .content1 textarea:focus {
+            background: rgba(244, 246, 247, 0.4);
+        }
+        .content1 button {
+            height: 40px;
+            width: 100%;
+            border: none;
+            background-color: rgba(177, 154, 232, 0.6);
+            color: rgba(248, 247, 251, 0.8);
+            letter-spacing: 20px;
+            font-size: 16px;
+            box-shadow: 5px 5px 2px 1px #b288d2;
+        }
+        /* .content1 button:hover {
+            background: rgba(133, 103, 203, 0.4);
+            color: white;
+        } */
+    </style>
+    <script>
+        $(function(){
+            var index = 1;
+            $('.content1').on('input',function(){
+                if($('textarea').val()){
+                    $('button').removeAttr('disabled').css('background','rgba(133, 103, 203, 0.4)');
+                    //提交内容
+                    $('button').on('click',function(){
+                        const USER = '用户';
+                        var text = $('textarea').val();
+                        if(text){
+                            $('.content').prepend('<p>'+USER+index+'：'+text+'</p>');
+                            index++;
+                            $('textarea').val('');
+                        }else{
+                            $('button').attr('disabled','disabled').css('background','rgba(177, 154, 232, 0.6)')
+                        }
+                    })
+                }else{
+                    $('button').attr('disabled','disabled').css('background','rgba(177, 154, 232, 0.6)')
+                }
+               
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="main">
+        <h1>留言板</h1>
+        <div class="page">
+            <div class="content"></div>
+            <div class="content1">
+                <textarea type="text" placeholder="留言内容" autofocus></textarea>
+                <button disabled>留言</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
